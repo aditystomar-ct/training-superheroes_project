@@ -28,6 +28,7 @@ public class SuperheroConsumer {
 
     @Scheduled(fixedRate = 10000)
     public void scheduledConsumeSuperhero() {
+
         consumeSuperhero();
     }
 

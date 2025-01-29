@@ -20,10 +20,12 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 @RestController
 public class SuperheroController {
 
+    @Autowired
     private SuperheroService superheroService;
 
     @Autowired
     private SqsConfig sqsconfig;
+
 
     @Autowired
     private SqsClient sqsClient;
