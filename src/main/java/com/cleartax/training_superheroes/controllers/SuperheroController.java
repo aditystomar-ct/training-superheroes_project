@@ -13,12 +13,13 @@ import com.cleartax.training_superheroes.dto.Superhero;
 import com.cleartax.training_superheroes.dto.SuperheroRequestBody;
 import com.cleartax.training_superheroes.services.SuperheroConsumer;
 import com.cleartax.training_superheroes.services.SuperheroService;
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
-@Getter
+@Data
 @RestController
 public class SuperheroController {
 
@@ -41,7 +42,7 @@ public class SuperheroController {
     @GetMapping("/hello")
     public String hello(
             @RequestParam(value = "superHeroName", defaultValue = "Hello") String superHeroName,
-            @RequestParam(value = "universe", defaultValue = "Superheroes") String universe) {
+            @RequestParam(value = "universe", defaultValue = "World") String universe) {
 
         // Create a JSON-like message body
         String messageBody = String.format("{\"superHeroName\":\"%s\", \"universe\":\"%s\"}", superHeroName, universe);
@@ -49,12 +50,12 @@ public class SuperheroController {
         // Send the message to LocalStack
         amazonSQS.sendMessage(new com.amazonaws.services.sqs.model.SendMessageRequest()
                 .withQueueUrl("http://sqs.ap-south-1.localhost.localstack.cloud:4566/000000000000/superhero-queue") // Your LocalStack queue URL
-                .withMessageBody(messageBody)); // JSON message body
+                .withMessageBody(messageBody)); // Correct JSON format message body
 
         return String.format("The superHeroName %s from %s universe!", superHeroName, universe);
     }
 
-   //hit the api to start the Scheduleder in superHeroconsumer;
+    //hit the api to start the Scheduleder in superHeroconsumer;
     @GetMapping("/consume-superhero")
     public String manuallyConsumeSuperhero() {
         try {
