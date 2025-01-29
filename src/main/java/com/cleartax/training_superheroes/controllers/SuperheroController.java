@@ -13,42 +13,35 @@ import com.cleartax.training_superheroes.dto.Superhero;
 import com.cleartax.training_superheroes.dto.SuperheroRequestBody;
 import com.cleartax.training_superheroes.services.SuperheroConsumer;
 import com.cleartax.training_superheroes.services.SuperheroService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
+@Getter
 @RestController
 public class SuperheroController {
 
-    @Autowired
     private SuperheroService superheroService;
-
-    @Autowired
     private SqsConfig sqsconfig;
-
-
-    @Autowired
     private SqsClient sqsClient;
-
-    @Autowired
     private SuperheroConsumer superheroConsumer;
-
-    @Autowired
     private AmazonSQS amazonSQS;
 
 
-    @Autowired
+
     public SuperheroController(SuperheroService superheroService, AmazonSQS amazonSQS , SuperheroConsumer superheroConsumer) {
         this.superheroService = superheroService;
         this.amazonSQS = amazonSQS;
         this.superheroConsumer = superheroConsumer;
     }
 
-    //OPERTION FOR SQS QUEUE
+    //OPERATION FOR SQS QUEUE
+
     @GetMapping("/hello")
     public String hello(
-            @RequestParam(value = "superHeroName", defaultValue = "World") String superHeroName,
-            @RequestParam(value = "universe", defaultValue = "Marvel") String universe) {
+            @RequestParam(value = "superHeroName", defaultValue = "Hello") String superHeroName,
+            @RequestParam(value = "universe", defaultValue = "Superheroes") String universe) {
 
         // Create a JSON-like message body
         String messageBody = String.format("{\"superHeroName\":\"%s\", \"universe\":\"%s\"}", superHeroName, universe);
