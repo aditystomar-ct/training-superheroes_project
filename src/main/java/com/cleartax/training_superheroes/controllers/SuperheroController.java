@@ -14,8 +14,6 @@ import com.cleartax.training_superheroes.dto.SuperheroRequestBody;
 import com.cleartax.training_superheroes.services.SuperheroConsumer;
 import com.cleartax.training_superheroes.services.SuperheroService;
 import lombok.Data;
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
@@ -55,7 +53,7 @@ public class SuperheroController {
         return String.format("The superHeroName %s from %s universe!", superHeroName, universe);
     }
 
-    //hit the api to start the Scheduleder in superHeroconsumer;
+    //hit the api to start the Scheduler in superHeroConsumer;
     @GetMapping("/consume-superhero")
     public String manuallyConsumeSuperhero() {
         try {
@@ -125,6 +123,5 @@ public class SuperheroController {
         System.out.println("Updating superhero: " + name + " in universe: " + universe);
         return superheroService.updateSuperhero(name, universe, updatedDetails);
     }
-
 
 }

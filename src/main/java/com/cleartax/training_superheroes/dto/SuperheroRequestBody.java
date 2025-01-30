@@ -3,6 +3,7 @@ package com.cleartax.training_superheroes.dto;
 import lombok.Getter;
 
 @Getter
+
 public class SuperheroRequestBody {
     private final String name;
     private final String power;
@@ -42,6 +43,7 @@ public class SuperheroRequestBody {
         }
 
         public SuperheroRequestBody build() {
+
             return new SuperheroRequestBody(this.name, this.power, this.universe);
         }
 

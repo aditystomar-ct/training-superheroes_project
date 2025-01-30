@@ -3,16 +3,15 @@ package com.cleartax.training_superheroes.services;
 import com.cleartax.training_superheroes.dto.Superhero;
 import com.cleartax.training_superheroes.dto.SuperheroRequestBody;
 import com.cleartax.training_superheroes.repos.SuperheroRepository;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 @Service
+@Data
 public class SuperheroService {
 
     private SuperheroRepository superheroRepository;
 
-    public SuperheroService(SuperheroRepository superheroRepository){
-        this.superheroRepository = superheroRepository;
-    }
 
     public Superhero getSuperhero(String name, String universe) {
         System.out.println("testing is started and query parameters" + universe + " " + name);
@@ -66,11 +65,7 @@ public class SuperheroService {
         }
         return superhero;
     }
-//    private Superhero getDummyDate(String name){
-//        Superhero superhero =  new Superhero();
-//        superhero.setName(name);
-//        return superhero;
-//    }
+
 public boolean deleteSuperhero(String name, String universe) {
     Superhero superhero = superheroRepository.findByNameAndUniverse(name, universe);
     if (superhero != null) {
@@ -86,8 +81,6 @@ public boolean deleteSuperhero(String name, String universe) {
         superhero.setName(requestBody.getName());
         superhero.setPower(requestBody.getPower());
         superhero.setUniverse(requestBody.getUniverse());
-
-
         return superheroRepository.save(superhero);
     }
 
