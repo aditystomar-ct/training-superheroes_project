@@ -1,8 +1,6 @@
 package com.cleartax.training_superheroes.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
